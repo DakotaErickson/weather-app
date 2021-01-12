@@ -1,14 +1,10 @@
 const path = require('path');
-const fs = require('fs');
 const request = require('request');
 
 const apiJsonFilePath = path.join(__dirname, '../api-key.json')
 
 // don't check API key into github
-const dataBuffer = fs.readFileSync(apiJsonFilePath);
-const data = dataBuffer.toString();
-const keyJson = JSON.parse(data);
-const weatherApiKey = keyJson['weather'];
+const weatherApiKey = process.env.weatherKey;
 
 
 const forecast = (latitude, longitude, callback) => {
