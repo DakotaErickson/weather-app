@@ -1,11 +1,20 @@
 const path = require('path');
 const request = require('request');
+const fs = require('fs');
 
 const apiJsonFilePath = path.join(__dirname, '../api-key.json')
 
-// don't check API key into github
-const weatherApiKey = process.env.weatherKey;
 
+// don't check API key into version control
+let weatherApiKey = '';
+
+// if I can't get the API key from an environment variable then look in a local json file for the api key
+if (!process.env.weatherKey) {
+    const dataBuffer = fs.readFileSync(apiJsonFilePath);
+    const data = dataBuffer.toString();
+    const keyJson = JSON.parse(data);
+    weatherApiKey = keyJson['weather'];
+}
 
 const forecast = (latitude, longitude, callback) => {
     const url = 'http://api.weatherstack.com/current?access_key=' + weatherApiKey + '&units=f&query=' + latitude + ',' + longitude;
@@ -16,7 +25,7 @@ const forecast = (latitude, longitude, callback) => {
     }, (error, { body }) => {
         if (error) { // low level error like inability to connect to the API
             callback('Unable to connect to weather service.', undefined);
-        } else if (body.error) { // error from a malformed response
+        } else if (body.error) { // error from a malformed request
             callback('Unable to find location. Try another search.', undefined);
         } else { // successful API call with valid response
             callback(undefined, 'Weather description: ' + body.current.weather_descriptions[0].toLowerCase() + '. The temperature is ' + 

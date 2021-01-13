@@ -8,8 +8,10 @@ const app = express();
 // get the port env variable from heroku or default to 3000 for running locally
 const port = process.env.PORT || 3000;
 
-// define paths for Express config
+// define the directory to serve
 const publicDirectoryPath = path.join(__dirname, "../public");
+
+// define where the templates and partials live
 const templatesPath = path.join(__dirname, '../templates/views');
 const partialsPath = path.join(__dirname, '../templates/partials');
 
@@ -46,7 +48,7 @@ app.get('/help', (req, res) => {
     });
 });
 
-
+// weather endpoint for returning API responses
 app.get('/weather', (req, res) => {
     if (!req.query.address) {
         return res.send({
@@ -93,6 +95,7 @@ app.get('*', (req, res) => {
     });
 })
 
+// tell the app to listen an then log which port it's listening on
 app.listen(port, () => {
     console.log('Server listening on port: ' + port);
 })
