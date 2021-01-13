@@ -6,7 +6,7 @@ const apiJsonFilePath = path.join(__dirname, '../api-key.json')
 
 
 // don't check the API key into version control
-let geocodeApiKey = '';
+let geocodeApiKey;
 
 
 // if I can't get the API key from an environment variable then look in a local json file for the api key
@@ -15,6 +15,8 @@ if (!process.env.geocodeKey) {
     const data = dataBuffer.toString();
     const keyJson = JSON.parse(data);
     geocodeApiKey = keyJson['geocode'];
+} else {
+    geocodeApiKey = process.env.geocodeKey;
 }
 
 const geocode = (address, callback) => {

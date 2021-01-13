@@ -6,7 +6,7 @@ const apiJsonFilePath = path.join(__dirname, '../api-key.json')
 
 
 // don't check API key into version control
-let weatherApiKey = '';
+let weatherApiKey;
 
 // if I can't get the API key from an environment variable then look in a local json file for the api key
 if (!process.env.weatherKey) {
@@ -14,6 +14,8 @@ if (!process.env.weatherKey) {
     const data = dataBuffer.toString();
     const keyJson = JSON.parse(data);
     weatherApiKey = keyJson['weather'];
+} else {
+    weatherApiKey = process.env.weatherKey;
 }
 
 const forecast = (latitude, longitude, callback) => {
