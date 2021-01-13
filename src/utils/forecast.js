@@ -28,8 +28,10 @@ const forecast = (latitude, longitude, callback) => {
         } else if (body.error) { // error from a malformed request
             callback('Unable to find location. Try another search.', undefined);
         } else { // successful API call with valid response
-            callback(undefined, 'Weather description: ' + body.current.weather_descriptions[0].toLowerCase() + '. The temperature is ' + 
-                        body.current.temperature + '\u00B0F and the feels like temperature is ' + body.current.feelslike + '\u00B0F.')
+            callback(undefined, 'The current weather description is: ' + body.current.weather_descriptions[0].toLowerCase() +
+                         '. The temperature is ' + body.current.temperature + '\u00B0F and the feels like temperature is ' + 
+                         body.current.feelslike + '\u00B0F.' + ' The wind speed is ' + body.current.wind_speed + 
+                        'mph and the direction is ' + body.current.wind_dir + '.');
         }
     })
 };
