@@ -1,5 +1,6 @@
 body {
-    color: #333333;
+    color: black;
+    background-color: #cccccc;
     font-family: arial;
     max-width: 650px;
     margin: 0 auto;
@@ -20,8 +21,8 @@ header {
 }
 
 footer {
-    color: #888888;
-    border-top: 1px solid #eeeeee;
+    color: black;
+    border-top: 1px solid black;
     margin-top: 16px;
     padding: 16px 0;
 }
@@ -32,9 +33,13 @@ header h1 {
 }
 
 header a {
-    color: #888888;
+    color: black;
     margin-right: 16px;
     text-decoration: none;
+}
+
+.header-links {
+    border-bottom: 1px solid black;
 }
 
 .portrait {
@@ -42,14 +47,16 @@ header a {
 }
 
 input {
-    border: 1px solid #cccccc;
+    border: 1px solid black;
     padding: 8px;
 }
+input:focus {outline:0;}
 
 button {
     cursor: pointer;
-    border: 1px solid #888888;
+    border: 1px solid black; 
     background: #888888;
     color: white;
     padding: 8px;
 }
+button:focus {outline:0;}
