@@ -5,7 +5,8 @@ const geocode = require('./utils/geocode');
 const forecast = require('./utils/forecast');
 
 const app = express();
-// get the port env variable from heroku or default to 3000 for running locally
+
+// get the port env variable or default to 3000 for running locally
 const port = process.env.PORT || 3000;
 
 // define the directory to serve
@@ -39,20 +40,11 @@ app.get('/about', (req, res) => {
     });
 });
 
-// set up a route for the help page
-app.get('/help', (req, res) => {
-    res.render('help', {
-        title: 'Help',
-        name: 'Dakota Erickson',
-        helpMessage: 'Example help message.'
-    });
-});
-
 // weather endpoint for returning API responses
 app.get('/weather', (req, res) => {
     if (!req.query.address) {
         return res.send({
-            error: 'Address must be provided.'
+            error: 'A location must be provided from which to get weather data.'
         });
     }
 
@@ -74,16 +66,6 @@ app.get('/weather', (req, res) => {
         })
     });
 });
-
-
-// matches any routes requested after `/help` that don't exist
-app.get('/help/*', (req, res) => {
-    res.render('404', {
-        title: 'Help 404',
-        errorMessage: 'Help Article Not Found',
-        name: 'Dakota Erickson'
-    });
-})
 
 // routes are matched from the top of the file to the bottom
 // this has to be the last route to ensure we aren't stepping on an existing page

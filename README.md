@@ -1,3 +1,3 @@
 # weather-app
-Nodejs weather application using asyncronous API calls and Heroku to serve it.
-https://erickson-weather-application.herokuapp.com/
+Nodejs weather application using asyncronous API calls and Fly.io to serve it.
+https://dakotaericksonweather.fly.dev/
